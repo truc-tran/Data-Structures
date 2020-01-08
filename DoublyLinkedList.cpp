@@ -1,6 +1,9 @@
+#ifndef DOUBLYLINKEDLIST_CPP
+#define DOUBLYLINKEDLIST_CPP
+
 /******************************************************************************
 
-                            Doubly Linked List (by: Truc Tran )
+                            Truc Tran
 
 *******************************************************************************/
 #include <iostream>
@@ -14,7 +17,7 @@ struct node{
 };
 
 template <typename T>
-class Linklist{
+class LinkedList{
 private:
     // Tail, head, size of Linklist
      node<T>* tail;
@@ -23,7 +26,7 @@ private:
 
 public:
      // Initialize the data in the node--EMPTY
-     Linklist(){
+     LinkedList(){
          tail = nullptr;
          head = nullptr;
          size = 0;
@@ -38,7 +41,7 @@ public:
 
          if (head != nullptr)
              head->prev = curr;
-        
+       
          head = curr;
          
         //when the list is empty
@@ -68,9 +71,63 @@ public:
 
          size = size + 1;
      }
+     
+     // Pop from the back < Don't need to write 0 to prev pointer >
+     T pop_back(){
+         T result;
+         if(size == 0) {
+             throw "ERROR: Tried to pop from the back of an empty LinkedList";
+         }
+         else if (size == 1){
+             result = head->data;
+             head = nullptr;
+             tail = nullptr;
+             
+         }
+         else{
+             node<T>* curr = tail;
+             tail = tail->prev;
+             tail->next = nullptr;
+             
+             result = curr->data;
+             //free the space of the pop node
+             delete curr;
+         }
+         
+         size = size - 1;
+         
+         return result;
+     }
+     
+     // Pop from the front
+     T pop_front(){
+         T result;
+         if(size == 0) {
+             throw "ERROR: Tried to pop from the back of an empty LinkedList";
+         }
+         else if (size == 1){
+             result = head->data;
+             head = nullptr;
+             tail = nullptr;
+             
+         }
+         else{
+             node<T>* curr = head;
+             head = head->next;
+             head->prev = nullptr;
+             
+             result = curr->data;
+             //free the space of the pop node
+             delete curr;
+         }
+         
+         size = size - 1;
+         
+         return result;
+     }
 
      //Length of Linklist
-     int length(){
+     int length() const{
          return size;
      }
 
@@ -100,27 +157,4 @@ public:
      }
 };
 
-/*---------------------------------MAIN-----------------------------------*/
-int main(){
-     cout << "Welcome! (^.^) " << endl;
-     Linklist<int> trucList;
-     cout << "----------Add to the front:----------" << endl;
-     
-     for(int i = 1; i < 10; i = i + 1){
-         trucList.addFront(i);
-     }
-     
-     trucList.printForward();
-     trucList.printBackward();
-     cout << "Length: " << trucList.length() << endl;
-     cout << "----------Add to the back:----------" << endl;
-     
-     for(int i = 2; i < 60; i = i * 3){
-         trucList.addBack(i);
-     }
-
-     trucList.printForward();
-     trucList.printBackward();
-     cout << "Length: " << trucList.length() << endl;
-     return 0;
-}
+#endif
