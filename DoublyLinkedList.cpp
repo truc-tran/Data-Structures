@@ -155,6 +155,21 @@ public:
          
          cout << endl;
      }
+     
+     // modify + read the reference of the data at that node
+     T& operator[](int i) {
+         // i is out of the range
+         if(i < 0 || i >= size )
+            throw "i is out the range of the list";
+         
+         node<T> * curr = head;
+        
+         for(int count = 0; count < i; ++count){
+             curr = curr->next;
+         }
+         
+         return curr->data;
+     }
 };
 
 #endif
