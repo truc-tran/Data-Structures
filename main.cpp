@@ -3,6 +3,7 @@ using namespace std;
 #include "DoublyLinkedList.cpp"
 #include "Stack.cpp"
 #include "Queue.cpp"
+#include "BinaryTree.cpp"
 
 /*---------------------------------MAIN-----------------------------------*/
 int main(){
