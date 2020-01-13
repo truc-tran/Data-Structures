@@ -21,14 +21,16 @@ private:
     LinkedList<T> thelist;
 
 public:
+    Stack () {}
+
     void push_top(T elem){
         thelist.addFront(elem);
     }
-   
+
     T pop_top(){
        return thelist.pop_front();
     }
-   
+
     int size(){
         return thelist.length();
     }

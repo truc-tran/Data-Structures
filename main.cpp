@@ -85,8 +85,9 @@ void printBinaryTree(){
     tree.printPostOrder();
 
     // Find Node
-    int num = 9;
+    int num = 0;
     cout << "\nFinding " << num << ": "<< (tree.find(num) ? "true" : "false") << endl;
+    cout << "\nFinding " << num << ": "<< (tree.iterativeFind(num) ? "true" : "false") << endl;
 }
 
 int main(){

@@ -12,6 +12,7 @@
 *******************************************************************************/
 #include <iostream>
 using namespace std;
+#include "Stack.cpp"
 
 template <typename T>
 class BinarySearchTree {
@@ -139,7 +140,6 @@ public:
 
     // print all values from the node to its decestors: L, R, Root
     void dfsPostOrder(Node* ptr){
-
         if (ptr == nullptr) {
             return;
         }
@@ -150,29 +150,48 @@ public:
         cout << ptr->data << ", ";
     }
 
-    // Search if the data is in the tree
-    bool find(T elem){
-        Node* curr = root;
-        cout << "Node: ";
-        return dfsFind(curr, elem);
+    // Search if the data is in the tree with RECURSION
+    bool find(T elem) {
+        return dfsFind(root, elem);
     }
 
     bool dfsFind(Node* curr, T elem) {
         if (curr == nullptr)
             return false;
 
-        cout << curr->data << ", ";
-
         // Look at the current node and compare in order to go left or right
-        if( curr->data == elem){
+        if( curr->data == elem) {
             return true;
         } else if (curr->data > elem) {
-            curr = curr->left;
+            return dfsFind(curr->left, elem);
         } else {
-            curr = curr->right;
+            return dfsFind(curr->right, elem);
+        }
+    }
+
+    bool iterativeFind(T elem) {
+        Stack<Node*> myStack;
+        myStack.push_top(root);
+
+        // Added the node everytime we visit until nothing
+        while (myStack.size() != 0) {
+            Node* curr = myStack.pop_top();
+
+            if (!curr) {
+                break;
+            }
+
+            if (elem == curr->data) {
+                return true;
+            } else if (elem < curr->data) {
+                myStack.push_top(curr->left);
+            } else {
+                myStack.push_top(curr->right);
+            }
+
         }
 
-        return dfsFind(curr, elem);
+        return false;
     }
 };
 
