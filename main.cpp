@@ -67,7 +67,7 @@ void printBinaryTree(){
     Queue<int> queuelist;
     BinarySearchTree<int> tree;
     cout << "Size of Binary Tree: " << tree.size() << endl;
-    
+
     tree.insert(8);
     tree.insert(4);
     tree.insert(3);
@@ -76,13 +76,17 @@ void printBinaryTree(){
     tree.insert(1);
     tree.insert(2);
     tree.insert(5);
-    
+
     cout << "Size of Binary Tree: " << tree.size() << endl;
-    
+
     // PRINT Orders
     tree.printPreOrder();
     tree.printInOrder();
     tree.printPostOrder();
+
+    // Find Node
+    int num = 9;
+    cout << "\nFinding " << num << ": "<< (tree.find(num) ? "true" : "false") << endl;
 }
 
 int main(){
