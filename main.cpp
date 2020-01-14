@@ -88,6 +88,10 @@ void printBinaryTree(){
     int num = 0;
     cout << "\nFinding " << num << ": "<< (tree.find(num) ? "true" : "false") << endl;
     cout << "\nFinding " << num << ": "<< (tree.iterativeFind(num) ? "true" : "false") << endl;
+    cout << "TRAVERSAL: " << endl;
+    tree.print(TRAVERSE_PRE_ORDER);
+    tree.print(TRAVERSE_IN_ORDER);
+    tree.print(TRAVERSE_POST_ORDER);
 }
 
 int main(){

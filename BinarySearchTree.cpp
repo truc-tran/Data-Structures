@@ -149,6 +149,52 @@ public:
         dfsPostOrder(ptr->right);
         cout << ptr->data << ", ";
     }
+    
+    /*------------------------------------NOT FUNCTIONING (not tail-recursive)----------------------------------------------------------*/
+    // Print the tree in the order you choose: 0-PreOrder, 1-InOrder, 2-PostOrder
+    #define TRAVERSE_PRE_ORDER 0
+    #define TRAVERSE_IN_ORDER 1
+    #define TRAVERSE_POST_ORDER 2
+    void print (int order) {
+        if (root == nullptr) {
+            cout << "There is nothing in the tree ^.^" << endl;
+            return;
+        }
+        
+        Stack<Node*> myStack;
+        myStack.push_top(root);
+        
+        while (myStack.size() != 0) {
+            Node* curr = myStack.pop_top();
+            
+            if (curr == nullptr)
+                continue;
+            
+            if (order ==  TRAVERSE_PRE_ORDER) {
+                // Preorder (Root, Left, Right): 8 4 3 1 2 5 6 9
+                cout << curr->data << ", ";
+                myStack.push_top(curr->left);
+                myStack.push_top(curr->right);
+            } else if (order == TRAVERSE_IN_ORDER) {
+                // InOrder (Left, Root, Right): 1 2 3 4 5 6 7 8 9
+                myStack.push_top(curr->left);
+                cout << curr->data << ", ";
+                myStack.push_top(curr->right);
+            } else if (order == TRAVERSE_POST_ORDER) {
+                // PostOrder (Left, Right, Root): 2 1 3 5 6 4 9 8
+                myStack.push_top(curr->left);
+                myStack.push_top(curr->right);
+                cout << curr->data << ", ";
+            }
+            
+        }
+        
+        cout << "\n\n";
+        
+    }
+    /*------------------------------------NOT FUNCTIONING (not tail-recursive)----------------------------------------------------------*/
+    
+    
 
     // Search if the data is in the tree with RECURSION
     bool find(T elem) {
@@ -169,6 +215,7 @@ public:
         }
     }
 
+    // Search WITHOUT RECURSION
     bool iterativeFind(T elem) {
         Stack<Node*> myStack;
         myStack.push_top(root);
