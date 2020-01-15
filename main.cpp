@@ -4,6 +4,7 @@ using namespace std;
 #include "Stack.cpp"
 #include "Queue.cpp"
 #include "BinarySearchTree.cpp"
+#include "HashMap.cpp"
 
 /*---------------------------------MAIN-----------------------------------*/
 void printLinkedList(){
@@ -94,10 +95,37 @@ void printBinaryTree(){
     tree.print(TRAVERSE_POST_ORDER);
 }
 
+// return positive integer for any string keyword
+unsigned int hashString (string word) {
+    unsigned int result = 0x12345678;
+
+    for (int i = 0; i < word.size(); ++i) {
+        // XOR the result with each letter: make sure it is random
+        result = result ^ word[i];
+        // removes commutative property & modifies all bits in the int: rotate left
+        result = _rotl(result, 5);
+    }
+
+    return result;
+}
+
+void printHashMap () {
+    HashMap<string> hm(hashString);
+
+    hm.insert("Facebook", "Stock Price($): -256.89");
+    hm.insert("Tesla", "Stock Price($): $0.99 -> cents");
+    cout << "Tesla: " <<  hm.at("Tesla") << endl;
+    hm.insert("Tesla", "Stock Price($): priceless");
+    cout << "Tesla: " << hm.at("Tesla") << endl;
+    cout << "Size of hash map: " << hm.getSize() << endl;
+}
+
 int main(){
     printLinkedList();
     printStack();
     printQueue();
     printBinaryTree();
+    printHashMap();
+
     return 0;
 }
